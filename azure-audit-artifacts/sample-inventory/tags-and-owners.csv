@@ -1,0 +1,30 @@
+tag_key,description,required,example_values,data_type,notes
+env,Environment identifier,Yes,"prod, dev, test, stage",String,Must match naming convention environment code
+app,Application or workload name,Yes,"patient-portal, notifications, scheduling, shared",String,Use consistent application names across resources
+owner,Technical owner email,Yes,j.martinez@northwindhealth.fake,Email,Must be valid employee email; update on role changes
+costcenter,Financial cost allocation code,Yes,"CC-4000, CC-4100, CC-4200, CC-4300, CC-4500",String,Must match approved cost center list from Finance
+data_classification,Data sensitivity level,Yes,"PHI, Confidential, Internal, Public, Test",String,Required for compliance; PHI triggers HIPAA controls
+lifecycle,Resource lifecycle status,Yes,"active, review, temporary, deprecated",String,Resources marked 'review' queued for cleanup assessment
+
+owner_email,owner_name,department,cost_center,applications_owned,notes
+j.martinez@northwindhealth.fake,Jordan Martinez,Engineering,CC-4100,"patient-portal",Lead developer for patient-facing applications
+s.chen@northwindhealth.fake,Sarah Chen,Engineering,CC-4200,"notifications",Owns messaging and notification services
+d.patel@northwindhealth.fake,Dev Patel,Data Engineering,CC-4300,"shared (data)",Database administrator and data platform owner
+m.thompson@northwindhealth.fake,Morgan Thompson,Infrastructure,CC-4000,"shared (infrastructure)",Security and networking infrastructure owner
+r.kim@northwindhealth.fake,Riley Kim,DevOps,CC-4000,"shared (monitoring)",Observability and monitoring platform owner
+l.garcia@northwindhealth.fake,Luis Garcia,Platform Engineering,CC-4500,"microservices",Container platform and Kubernetes owner
+a.wong@northwindhealth.fake,Alex Wong,QA Engineering,CC-4100,"loadtest",Performance and load testing owner
+
+costcenter_code,costcenter_name,budget_owner,monthly_budget,notes
+CC-4000,Infrastructure & Shared Services,m.thompson@northwindhealth.fake,3000,Covers networking/security/monitoring shared costs
+CC-4100,Patient Portal,j.martinez@northwindhealth.fake,6000,Primary patient-facing application
+CC-4200,Messaging & Notifications,s.chen@northwindhealth.fake,2500,Email/SMS notification services
+CC-4300,Data Platform,d.patel@northwindhealth.fake,5500,SQL databases and storage
+CC-4500,Container Platform,l.garcia@northwindhealth.fake,3500,AKS and container registry
+
+data_classification,description,handling_requirements,examples
+PHI,Protected Health Information,Encryption required; access logging; HIPAA BAA required,Patient records; medical documents; appointment data
+Confidential,Sensitive business data,Encryption required; need-to-know access,API keys; connection strings; financial data
+Internal,Internal business use only,Standard access controls,Application logs; telemetry; internal documentation
+Public,Publicly shareable,No special controls,Marketing content; public documentation
+Test,Test/synthetic data only,No production data allowed,Development databases; test environments

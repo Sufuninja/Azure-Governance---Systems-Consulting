@@ -1,0 +1,103 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#0078D4', 'primaryTextColor': '#fff', 'primaryBorderColor': '#005A9E', 'lineColor': '#005A9E', 'secondaryColor': '#50E6FF', 'tertiaryColor': '#D2D2D2'}}}%%
+
+flowchart TB
+    subgraph Internet["Internet"]
+        Users["External Users<br/>👥"]
+    end
+
+    subgraph Azure["Azure - NWH Production Environment"]
+        
+        subgraph WebTier["Web Tier<br/>snet-nwh-prod-web (10.1.1.0/24)"]
+            Portal["app-nwh-portal-prod-001<br/>📱 Patient Portal<br/>(App Service)"]
+        end
+
+        subgraph APITier["API Tier<br/>snet-nwh-prod-api (10.1.2.0/24)"]
+            PortalAPI["app-nwh-portalapi-prod-001<br/>⚡ Portal API<br/>(App Service)"]
+            NotifyFunc["func-nwh-notifications-prod-001<br/>📧 Notifications<br/>(Function App)"]
+        end
+
+        subgraph DataTier["Data Tier<br/>snet-nwh-prod-data (10.1.3.0/24)"]
+            SQL[("sql-nwh-main-prod-001<br/>🗄️ SQL Server")]
+            PatientDB[("sqldb-nwh-patients-prod<br/>📋 Patient Records")]
+            AppointDB[("sqldb-nwh-appointments-prod<br/>📅 Appointments")]
+            Storage[("stnwhpatientdocs001<br/>📁 Blob Storage")]
+        end
+
+        subgraph Messaging["Messaging Services"]
+            ServiceBus["sb-nwh-prod-001<br/>📨 Service Bus<br/>(Premium)"]
+        end
+
+        subgraph Security["Security Services"]
+            KeyVault["kv-nwh-prod-001<br/>🔐 Key Vault"]
+        end
+
+        subgraph Monitoring["Observability"]
+            AppInsights["ai-nwh-prod-001<br/>📊 App Insights"]
+            LogAnalytics["log-nwh-prod-001<br/>📈 Log Analytics"]
+        end
+
+        subgraph Containers["Container Platform"]
+            ACR["acr-nwh-prod-001<br/>🐳 Container Registry"]
+            AKS["aks-nwh-prod-001<br/>☸️ AKS Cluster<br/>(3 nodes)"]
+        end
+
+        subgraph PrivateConnectivity["Private Endpoints"]
+            PEPSQL["pep-nwh-sql-prod-001"]
+            PEPStorage["pep-nwh-storage-prod-001"]
+            PEPKV["pep-nwh-kv-prod-001"]
+        end
+
+    end
+
+    %% External to Web
+    Users -->|"HTTPS"| Portal
+
+    %% Web to API
+    Portal -->|"REST API"| PortalAPI
+
+    %% API Dependencies
+    PortalAPI -->|"Query/Write"| SQL
+    PortalAPI -->|"Read/Write Files"| Storage
+    PortalAPI -->|"Get Secrets"| KeyVault
+    PortalAPI -->|"Publish Events"| ServiceBus
+
+    %% Function App Dependencies
+    ServiceBus -->|"Trigger"| NotifyFunc
+    NotifyFunc -->|"Query"| SQL
+    NotifyFunc -->|"Get Secrets"| KeyVault
+
+    %% Database Structure
+    SQL --- PatientDB
+    SQL --- AppointDB
+
+    %% Container Dependencies
+    ACR -->|"Pull Images"| AKS
+    AKS -->|"Query"| SQL
+    AKS -->|"Get Secrets"| KeyVault
+
+    %% Private Endpoints (dashed lines)
+    PEPSQL -.->|"Private Link"| SQL
+    PEPStorage -.->|"Private Link"| Storage
+    PEPKV -.->|"Private Link"| KeyVault
+
+    %% Monitoring (dashed lines)
+    Portal -.->|"Telemetry"| AppInsights
+    PortalAPI -.->|"Telemetry"| AppInsights
+    NotifyFunc -.->|"Telemetry"| AppInsights
+    AKS -.->|"Telemetry"| AppInsights
+    AppInsights -->|"Export"| LogAnalytics
+
+    %% Styling
+    classDef webTier fill:#0078D4,stroke:#005A9E,color:#fff
+    classDef apiTier fill:#50E6FF,stroke:#0078D4,color:#000
+    classDef dataTier fill:#FFB900,stroke:#D83B01,color:#000
+    classDef security fill:#107C10,stroke:#094509,color:#fff
+    classDef monitoring fill:#5C2D91,stroke:#3B1D5C,color:#fff
+    classDef container fill:#326CE5,stroke:#1F4690,color:#fff
+
+    class Portal webTier
+    class PortalAPI,NotifyFunc apiTier
+    class SQL,PatientDB,AppointDB,Storage dataTier
+    class KeyVault security
+    class AppInsights,LogAnalytics monitoring
+    class ACR,AKS container

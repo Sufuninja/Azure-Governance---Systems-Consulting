@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>05_Audit_Methodology_and_SOP.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="audit-methodology-and-change-control-procedures">Audit Methodology and Change Control Procedures</h1>
+<p><strong>Northwind Health — Azure Environment Audit</strong><br>
+<strong>February 2026</strong></p>
+<hr>
+<h2 id="part-1-how-this-audit-was-performed">Part 1: How This Audit Was Performed</h2>
+<p>This section describes the methodology used to conduct the Azure environment audit, ensuring transparency about our process and the safety measures applied throughout the engagement.</p>
+<hr>
+<h3 id="audit-phases">Audit Phases</h3>
+<p>The audit followed an eight-phase process designed to minimize risk while delivering comprehensive insights:</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    A[1. Intake] --> B[2. Access]
+    B --> C[3. Discovery]
+    C --> D[4. Analysis]
+    D --> E[5. Recommendations]
+    E --> F[6. Review]
+    F --> G[7. Execution Support]
+    G --> H[8. Handoff]
+</div></code></pre>
+<hr>
+<h3 id="phase-1-intake">Phase 1: Intake</h3>
+<p><strong>Duration:</strong> 1–2 meetings</p>
+<p>During intake, we gathered context about the business drivers, environment scope, and key stakeholders. Topics covered included:</p>
+<ul>
+<li>Number of subscriptions and approximate resource count</li>
+<li>Primary workloads and applications</li>
+<li>Compliance requirements (HIPAA, SOC2)</li>
+<li>Known issues or specific concerns</li>
+<li>Maintenance windows and change approval processes</li>
+</ul>
+<hr>
+<h3 id="phase-2-access-provisioning">Phase 2: Access Provisioning</h3>
+<p><strong>Duration:</strong> 1–3 days</p>
+<p>Access was provisioned with the minimum permissions necessary for discovery:</p>
+<table>
+<thead>
+<tr>
+<th>Access Level</th>
+<th>Scope</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reader</td>
+<td>All in-scope subscriptions</td>
+<td>Resource inventory, configuration review</td>
+</tr>
+<tr>
+<td>Reader</td>
+<td>Microsoft Entra ID</td>
+<td>Identity and access review</td>
+</tr>
+<tr>
+<td>Cost Management Reader</td>
+<td>Cost Management</td>
+<td>Cost data export and analysis</td>
+</tr>
+<tr>
+<td>Log Analytics Reader</td>
+<td>Relevant workspaces</td>
+<td>Diagnostic and logging review</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Read-Only First Policy:</strong> No write access was provisioned during the discovery phase. This ensures that the audit process cannot accidentally modify production resources.</p>
+<hr>
+<h3 id="phase-3-discovery">Phase 3: Discovery</h3>
+<p><strong>Duration:</strong> 2–5 days</p>
+<p>Discovery involved systematic inventory and documentation of all Azure resources. Tools and methods used:</p>
+<p><strong>Azure Resource Graph Queries</strong></p>
+<p>Resource Graph queries were used to extract resource inventory, identify untagged resources, and locate orphaned resources:</p>
+<pre class="hljs"><code><div>resources
+| project subscriptionId, resourceGroup, name, type, location, tags
+</div></code></pre>
+<p><strong>Azure CLI</strong></p>
+<p>The Azure CLI was used to export detailed resource configurations:</p>
+<pre class="hljs"><code><div>az resource list --subscription <span class="hljs-string">"&lt;subscription-name&gt;"</span> --output json
+</div></code></pre>
+<p><strong>Azure Cost Management</strong></p>
+<p>Cost data was exported for the assessment period to identify spending patterns and optimization opportunities.</p>
+<p><strong>Discovery Outputs:</strong></p>
+<ul>
+<li>Complete resource inventory (CSV/JSON)</li>
+<li>Resource group organization map</li>
+<li>Tag usage analysis</li>
+<li>Network topology documentation</li>
+<li>Cost breakdown by service and environment</li>
+</ul>
+<hr>
+<h3 id="phase-4-analysis">Phase 4: Analysis</h3>
+<p><strong>Duration:</strong> 3–5 days</p>
+<p>During analysis, the discovery data was evaluated against best practices and client requirements:</p>
+<table>
+<thead>
+<tr>
+<th>Analysis Area</th>
+<th>Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Naming &amp; Organization</td>
+<td>Consistency, discoverability, alignment with standards</td>
+</tr>
+<tr>
+<td>Tagging</td>
+<td>Completeness, accuracy, cost attribution capability</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Top drivers, waste identification, optimization opportunities</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>Private endpoints, Key Vault usage, RBAC configuration</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>App Insights coverage, log retention, alerting</td>
+</tr>
+<tr>
+<td>Architecture</td>
+<td>Dependencies, resilience, single points of failure</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="phase-5-recommendations">Phase 5: Recommendations</h3>
+<p><strong>Duration:</strong> 2–3 days</p>
+<p>Recommendations were developed with the following structure:</p>
+<ol>
+<li><strong>Finding</strong> — What was observed</li>
+<li><strong>Risk</strong> — Why it matters to the business</li>
+<li><strong>Recommendation</strong> — What action to take</li>
+<li><strong>Effort</strong> — Implementation complexity</li>
+<li><strong>Priority</strong> — Critical / High / Medium / Low</li>
+</ol>
+<p>Recommendations were categorized as:</p>
+<ul>
+<li><strong>Quick Wins</strong> — Low effort, immediate value</li>
+<li><strong>Short-Term</strong> — Requires planning, achievable this month</li>
+<li><strong>Medium-Term</strong> — Requires coordination, this quarter</li>
+<li><strong>Strategic</strong> — Major initiative, ongoing effort</li>
+</ul>
+<hr>
+<h3 id="phase-6-client-review">Phase 6: Client Review</h3>
+<p><strong>Duration:</strong> 1–2 meetings</p>
+<p>Findings and recommendations were presented to stakeholders for validation and prioritization. The review session covered:</p>
+<ol>
+<li>Executive summary of findings</li>
+<li>Key risks and concerns</li>
+<li>Cost analysis and savings opportunities</li>
+<li>Recommended quick wins</li>
+<li>Prioritization discussion</li>
+<li>Next steps and execution planning</li>
+</ol>
+<p>Client feedback was incorporated into final deliverables.</p>
+<hr>
+<h3 id="phase-7-execution-support-if-applicable">Phase 7: Execution Support (if applicable)</h3>
+<p>For recommendations requiring implementation, we provided advisory support following strict change control procedures. All changes were:</p>
+<ul>
+<li>Executed by client personnel (not consultants)</li>
+<li>Tested in non-production first</li>
+<li>Scheduled during approved maintenance windows</li>
+<li>Documented with rollback procedures</li>
+</ul>
+<hr>
+<h3 id="phase-8-handoff">Phase 8: Handoff</h3>
+<p>Final deliverables were compiled and handed over, including:</p>
+<ul>
+<li>Executive summary</li>
+<li>Detailed findings and recommendations</li>
+<li>Resource inventory data</li>
+<li>Naming standard documentation</li>
+<li>Dependency diagrams</li>
+<li>Reusable Resource Graph queries</li>
+</ul>
+<hr>
+<h2 id="part-2-change-control-and-safety-procedures">Part 2: Change Control and Safety Procedures</h2>
+<p>This section documents the safety procedures for implementing any changes arising from audit recommendations. These procedures protect the production environment and ensure changes can be reversed if issues arise.</p>
+<hr>
+<h3 id="core-safety-principles">Core Safety Principles</h3>
+<ol>
+<li><strong>Read-Only First</strong> — Discover and document before making any changes</li>
+<li><strong>Document Before Doing</strong> — Every change is documented with expected outcome and rollback procedure before execution</li>
+<li><strong>Non-Production First</strong> — Test all changes in development/test before production</li>
+<li><strong>Staged Deletion</strong> — Never delete resources immediately; use quarantine process</li>
+<li><strong>Client Ownership</strong> — Client personnel execute changes; consultants advise</li>
+</ol>
+<hr>
+<h3 id="change-categories">Change Categories</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Risk Level</th>
+<th>Examples</th>
+<th>Approval</th>
+<th>Timing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Low</td>
+<td>Tags, diagnostic settings, log retention</td>
+<td>Technical lead verbal</td>
+<td>Anytime</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Medium</td>
+<td>Scale down (non-prod), storage tier change, delete orphaned (after quarantine)</td>
+<td>Technical lead written</td>
+<td>Business hours</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Higher</td>
+<td>Scale down (prod), network config, Service Bus tier</td>
+<td>Change board</td>
+<td>Maintenance window</td>
+</tr>
+<tr>
+<td>4</td>
+<td>High</td>
+<td>Private endpoints, Key Vault policies, SQL tier (prod), NSG rules</td>
+<td>Change board + Security</td>
+<td>Maintenance window</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="quarantine-process-for-resource-deletion">Quarantine Process for Resource Deletion</h3>
+<p>Resources identified for deletion must go through a quarantine period before permanent removal:</p>
+<p><strong>Step 1: Create Quarantine Resource Group</strong></p>
+<pre class="hljs"><code><div>az group create \
+  --name <span class="hljs-string">"rg-nwh-quarantine-eastus"</span> \
+  --location <span class="hljs-string">"eastus"</span> \
+  --tags <span class="hljs-string">"purpose=quarantine"</span> <span class="hljs-string">"created_date=2026-02-01"</span>
+</div></code></pre>
+<p><strong>Step 2: Move Resources to Quarantine</strong></p>
+<pre class="hljs"><code><div>az resource move \
+  --destination-group <span class="hljs-string">"rg-nwh-quarantine-eastus"</span> \
+  --ids <span class="hljs-string">"&lt;resource-id&gt;"</span>
+</div></code></pre>
+<p><strong>Step 3: Observation Period</strong></p>
+<table>
+<thead>
+<tr>
+<th>Resource Type</th>
+<th>Minimum Wait</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Orphaned disk/snapshot</td>
+<td>7 days</td>
+</tr>
+<tr>
+<td>Unused public IP</td>
+<td>7 days</td>
+</tr>
+<tr>
+<td>Test/temporary resources</td>
+<td>3 days</td>
+</tr>
+<tr>
+<td>Any production-tagged resource</td>
+<td>14 days</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 4: Validation Before Deletion</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">No error logs referencing resource</label></li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">No failed deployments looking for resource</label></li>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2">Owner confirms no longer needed</label></li>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3">Observation period complete</label></li>
+</ul>
+<p><strong>Step 5: Delete After Validation</strong></p>
+<pre class="hljs"><code><div>az group delete --name <span class="hljs-string">"rg-nwh-quarantine-eastus"</span> --yes
+</div></code></pre>
+<hr>
+<h3 id="backup-requirements-before-production-changes">Backup Requirements Before Production Changes</h3>
+<table>
+<thead>
+<tr>
+<th>Resource Type</th>
+<th>Backup Method</th>
+<th>Verification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQL Database</td>
+<td>Point-in-time restore</td>
+<td>Verify backup exists</td>
+</tr>
+<tr>
+<td>Storage Account</td>
+<td>Soft delete enabled</td>
+<td>Verify retention period</td>
+</tr>
+<tr>
+<td>Key Vault</td>
+<td>Soft delete + purge protection</td>
+<td>Verify settings</td>
+</tr>
+<tr>
+<td>VM</td>
+<td>Snapshot OS + data disks</td>
+<td>Verify snapshot completed</td>
+</tr>
+<tr>
+<td>App Service</td>
+<td>Deployment slots</td>
+<td>Verify slot can swap</td>
+</tr>
+<tr>
+<td>AKS</td>
+<td>etcd backup / namespace export</td>
+<td>Verify backup accessible</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Backup Checklist:</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4">Backup taken &lt; 24 hours before change</label></li>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5">Backup verified (can we restore?)</label></li>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6">Retention sufficient for rollback window</label></li>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7">Restore procedure documented</label></li>
+</ul>
+<hr>
+<h3 id="rollback-procedures">Rollback Procedures</h3>
+<p><strong>App Service Plan Scale Rollback:</strong></p>
+<pre class="hljs"><code><div>az appservice plan update \
+  --name <span class="hljs-string">"plan-nwh-portal-prod-001"</span> \
+  --resource-group <span class="hljs-string">"rg-nwh-prod-web-eastus"</span> \
+  --sku P2v3  <span class="hljs-comment"># Original SKU</span>
+</div></code></pre>
+<p><strong>SQL Database Tier Rollback:</strong></p>
+<pre class="hljs"><code><div>az sql db update \
+  --name <span class="hljs-string">"sqldb-nwh-patients-prod"</span> \
+  --server <span class="hljs-string">"sql-nwh-main-prod-001"</span> \
+  --resource-group <span class="hljs-string">"rg-nwh-prod-data-eastus"</span> \
+  --service-objective S3  <span class="hljs-comment"># Original tier</span>
+</div></code></pre>
+<p><strong>Storage Account Tier Rollback:</strong></p>
+<ul>
+<li>Access tier changes may take up to 24 hours to complete</li>
+<li>For urgent rollback, copy data to new account with correct tier</li>
+</ul>
+<p><strong>Key Vault Secret Recovery:</strong></p>
+<pre class="hljs"><code><div>az keyvault secret recover \
+  --vault-name <span class="hljs-string">"kv-nwh-prod-001"</span> \
+  --name <span class="hljs-string">"&lt;secret-name&gt;"</span>
+</div></code></pre>
+<hr>
+<h3 id="pre-change-checklist">Pre-Change Checklist</h3>
+<p>Use before executing any change:</p>
+<ul>
+<li><input type="checkbox" id="checkbox8"><label for="checkbox8">Change documented and approved</label></li>
+<li><input type="checkbox" id="checkbox9"><label for="checkbox9">Backups verified</label></li>
+<li><input type="checkbox" id="checkbox10"><label for="checkbox10">Rollback procedure defined and tested</label></li>
+<li><input type="checkbox" id="checkbox11"><label for="checkbox11">Team notified</label></li>
+<li><input type="checkbox" id="checkbox12"><label for="checkbox12">Monitoring in place</label></li>
+<li><input type="checkbox" id="checkbox13"><label for="checkbox13">Within approved maintenance window (if required)</label></li>
+<li><input type="checkbox" id="checkbox14"><label for="checkbox14">Tested in non-production (if applicable)</label></li>
+</ul>
+<h3 id="post-change-checklist">Post-Change Checklist</h3>
+<p>Use after executing any change:</p>
+<ul>
+<li><input type="checkbox" id="checkbox15"><label for="checkbox15">Change completed successfully</label></li>
+<li><input type="checkbox" id="checkbox16"><label for="checkbox16">Functionality verified</label></li>
+<li><input type="checkbox" id="checkbox17"><label for="checkbox17">No errors in logs</label></li>
+<li><input type="checkbox" id="checkbox18"><label for="checkbox18">Performance within expected range</label></li>
+<li><input type="checkbox" id="checkbox19"><label for="checkbox19">Change log updated</label></li>
+<li><input type="checkbox" id="checkbox20"><label for="checkbox20">Stakeholders notified</label></li>
+</ul>
+<hr>
+<h3 id="change-log-template">Change Log Template</h3>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Resource</th>
+<th>Change</th>
+<th>Performed By</th>
+<th>Approved By</th>
+<th>Rollback Available</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="emergency-procedures">Emergency Procedures</h3>
+<p><strong>If Something Goes Wrong:</strong></p>
+<ol>
+<li><strong>Stop</strong> — Do not make additional changes</li>
+<li><strong>Assess</strong> — What changed? What's the impact?</li>
+<li><strong>Communicate</strong> — Notify stakeholders immediately</li>
+<li><strong>Rollback</strong> — Execute documented rollback procedure</li>
+<li><strong>Verify</strong> — Confirm system is restored</li>
+<li><strong>Document</strong> — Record incident details for post-mortem</li>
+</ol>
+<hr>
+<h2 id="part-3-engagement-deliverables-checklist">Part 3: Engagement Deliverables Checklist</h2>
+<p>The following items were delivered as part of this engagement:</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Executive Summary</td>
+<td>✓ Delivered</td>
+</tr>
+<tr>
+<td>Naming Standards and Governance</td>
+<td>✓ Delivered</td>
+</tr>
+<tr>
+<td>Cost Analysis and Quick Wins</td>
+<td>✓ Delivered</td>
+</tr>
+<tr>
+<td>Architecture Dependency Map</td>
+<td>✓ Delivered</td>
+</tr>
+<tr>
+<td>Audit Methodology and SOP</td>
+<td>✓ Delivered</td>
+</tr>
+<tr>
+<td>Resource Inventory (CSV/JSON)</td>
+<td>✓ Available upon request</td>
+</tr>
+<tr>
+<td>Tag and Ownership Matrix</td>
+<td>✓ Available upon request</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><em>Following these procedures ensures that changes are implemented safely, with appropriate oversight and the ability to recover if issues arise.</em></p>
+
+</body>
+</html>

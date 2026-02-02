@@ -1,0 +1,852 @@
+[
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-web-eastus",
+    "name": "app-nwh-portal-prod-001",
+    "type": "Microsoft.Web/sites",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "j.martinez@northwindhealth.fake",
+    "cost_center": "CC-4100",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "patient-portal",
+      "owner": "j.martinez",
+      "costcenter": "CC-4100",
+      "data_classification": "PHI",
+      "lifecycle": "active"
+    },
+    "notes": "Primary patient portal - external facing"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-web-eastus",
+    "name": "plan-nwh-portal-prod-001",
+    "type": "Microsoft.Web/serverfarms",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "j.martinez@northwindhealth.fake",
+    "cost_center": "CC-4100",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "patient-portal",
+      "owner": "j.martinez",
+      "costcenter": "CC-4100"
+    },
+    "notes": "P2v3 plan - currently overprovisioned"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-api-eastus",
+    "name": "app-nwh-portalapi-prod-001",
+    "type": "Microsoft.Web/sites",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "j.martinez@northwindhealth.fake",
+    "cost_center": "CC-4100",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "patient-portal",
+      "owner": "j.martinez",
+      "costcenter": "CC-4100",
+      "data_classification": "PHI",
+      "lifecycle": "active"
+    },
+    "notes": "Backend API for patient portal"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-api-eastus",
+    "name": "func-nwh-notifications-prod-001",
+    "type": "Microsoft.Web/sites",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "s.chen@northwindhealth.fake",
+    "cost_center": "CC-4200",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "notifications",
+      "owner": "s.chen",
+      "costcenter": "CC-4200",
+      "data_classification": "Internal",
+      "lifecycle": "active"
+    },
+    "notes": "Email/SMS notification processor"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-api-eastus",
+    "name": "plan-nwh-api-prod-001",
+    "type": "Microsoft.Web/serverfarms",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "j.martinez@northwindhealth.fake",
+    "cost_center": "CC-4100",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "patient-portal",
+      "owner": "j.martinez",
+      "costcenter": "CC-4100"
+    },
+    "notes": "Shared API App Service Plan"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-data-eastus",
+    "name": "sql-nwh-main-prod-001",
+    "type": "Microsoft.Sql/servers",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "d.patel@northwindhealth.fake",
+    "cost_center": "CC-4300",
+    "criticality": "Critical",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "d.patel",
+      "costcenter": "CC-4300",
+      "data_classification": "PHI",
+      "lifecycle": "active"
+    },
+    "notes": "Primary SQL Server instance"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-data-eastus",
+    "name": "sqldb-nwh-patients-prod",
+    "type": "Microsoft.Sql/servers/databases",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "d.patel@northwindhealth.fake",
+    "cost_center": "CC-4300",
+    "criticality": "Critical",
+    "tags": {
+      "env": "prod",
+      "app": "patient-portal",
+      "owner": "d.patel",
+      "costcenter": "CC-4300",
+      "data_classification": "PHI",
+      "lifecycle": "active"
+    },
+    "notes": "Patient records database - S3 tier"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-data-eastus",
+    "name": "sqldb-nwh-appointments-prod",
+    "type": "Microsoft.Sql/servers/databases",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "d.patel@northwindhealth.fake",
+    "cost_center": "CC-4300",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "scheduling",
+      "owner": "d.patel",
+      "costcenter": "CC-4300",
+      "data_classification": "PHI",
+      "lifecycle": "active"
+    },
+    "notes": "Appointment scheduling database"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-data-eastus",
+    "name": "stnwhpatientdocs001",
+    "type": "Microsoft.Storage/storageAccounts",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "d.patel@northwindhealth.fake",
+    "cost_center": "CC-4300",
+    "criticality": "Critical",
+    "tags": {
+      "env": "prod",
+      "app": "patient-portal",
+      "owner": "d.patel",
+      "costcenter": "CC-4300",
+      "data_classification": "PHI",
+      "lifecycle": "active"
+    },
+    "notes": "Patient document storage - all Hot tier"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-data-eastus",
+    "name": "stnwhbackups001",
+    "type": "Microsoft.Storage/storageAccounts",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "d.patel@northwindhealth.fake",
+    "cost_center": "CC-4300",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "d.patel",
+      "costcenter": "CC-4300",
+      "data_classification": "Internal",
+      "lifecycle": "active"
+    },
+    "notes": "Backup storage - should migrate to Cool tier"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-security-eastus",
+    "name": "kv-nwh-prod-001",
+    "type": "Microsoft.KeyVault/vaults",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "Critical",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000",
+      "data_classification": "Confidential",
+      "lifecycle": "active"
+    },
+    "notes": "Production secrets and certificates"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-security-eastus",
+    "name": "kv-nwh-prod-002",
+    "type": "Microsoft.KeyVault/vaults",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000",
+      "data_classification": "Confidential",
+      "lifecycle": "active"
+    },
+    "notes": "Secondary Key Vault - potentially redundant"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-messaging-eastus",
+    "name": "sb-nwh-prod-001",
+    "type": "Microsoft.ServiceBus/namespaces",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "s.chen@northwindhealth.fake",
+    "cost_center": "CC-4200",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "notifications",
+      "owner": "s.chen",
+      "costcenter": "CC-4200",
+      "data_classification": "Internal",
+      "lifecycle": "active"
+    },
+    "notes": "Premium tier - underutilized capacity"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-monitoring-eastus",
+    "name": "ai-nwh-prod-001",
+    "type": "Microsoft.Insights/components",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "r.kim@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "Medium",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "r.kim",
+      "costcenter": "CC-4000",
+      "data_classification": "Internal",
+      "lifecycle": "active"
+    },
+    "notes": "Shared App Insights - high ingestion volume"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-monitoring-eastus",
+    "name": "log-nwh-prod-001",
+    "type": "Microsoft.OperationalInsights/workspaces",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "r.kim@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "Medium",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "r.kim",
+      "costcenter": "CC-4000",
+      "data_classification": "Internal",
+      "lifecycle": "active"
+    },
+    "notes": "Log Analytics workspace - 90 day retention"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-network-eastus",
+    "name": "vnet-nwh-prod-eastus-001",
+    "type": "Microsoft.Network/virtualNetworks",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "Critical",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000",
+      "data_classification": "Internal",
+      "lifecycle": "active"
+    },
+    "notes": "Production VNet - 10.1.0.0/16"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-network-eastus",
+    "name": "snet-nwh-prod-web",
+    "type": "Microsoft.Network/virtualNetworks/subnets",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "Web tier subnet - 10.1.1.0/24"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-network-eastus",
+    "name": "snet-nwh-prod-api",
+    "type": "Microsoft.Network/virtualNetworks/subnets",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "API tier subnet - 10.1.2.0/24"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-network-eastus",
+    "name": "snet-nwh-prod-data",
+    "type": "Microsoft.Network/virtualNetworks/subnets",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "Critical",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "Data tier subnet - 10.1.3.0/24"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-network-eastus",
+    "name": "pep-nwh-sql-prod-001",
+    "type": "Microsoft.Network/privateEndpoints",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "Critical",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "Private endpoint for SQL Server"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-network-eastus",
+    "name": "pep-nwh-storage-prod-001",
+    "type": "Microsoft.Network/privateEndpoints",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "Private endpoint for patient docs storage"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-network-eastus",
+    "name": "pep-nwh-kv-prod-001",
+    "type": "Microsoft.Network/privateEndpoints",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "Critical",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "Private endpoint for Key Vault"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-containers-eastus",
+    "name": "acr-nwh-prod-001",
+    "type": "Microsoft.ContainerRegistry/registries",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "l.garcia@northwindhealth.fake",
+    "cost_center": "CC-4500",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "l.garcia",
+      "costcenter": "CC-4500",
+      "data_classification": "Internal",
+      "lifecycle": "active"
+    },
+    "notes": "Container registry - Premium SKU"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-prod-containers-eastus",
+    "name": "aks-nwh-prod-001",
+    "type": "Microsoft.ContainerService/managedClusters",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "l.garcia@northwindhealth.fake",
+    "cost_center": "CC-4500",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "microservices",
+      "owner": "l.garcia",
+      "costcenter": "CC-4500",
+      "data_classification": "Internal",
+      "lifecycle": "active"
+    },
+    "notes": "AKS cluster - 3 nodes - low utilization"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-dev-web-eastus",
+    "name": "app-nwh-portal-dev-001",
+    "type": "Microsoft.Web/sites",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "j.martinez@northwindhealth.fake",
+    "cost_center": "CC-4100",
+    "criticality": "Low",
+    "tags": {
+      "env": "dev",
+      "app": "patient-portal",
+      "owner": "j.martinez",
+      "costcenter": "CC-4100",
+      "data_classification": "Test",
+      "lifecycle": "active"
+    },
+    "notes": "Dev patient portal - runs 24/7"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-dev-web-eastus",
+    "name": "plan-nwh-portal-dev-001",
+    "type": "Microsoft.Web/serverfarms",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "j.martinez@northwindhealth.fake",
+    "cost_center": "CC-4100",
+    "criticality": "Low",
+    "tags": {
+      "env": "dev",
+      "app": "patient-portal",
+      "owner": "j.martinez",
+      "costcenter": "CC-4100"
+    },
+    "notes": "Dev App Service Plan - B2 tier"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-dev-api-eastus",
+    "name": "app-nwh-portalapi-dev-001",
+    "type": "Microsoft.Web/sites",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "j.martinez@northwindhealth.fake",
+    "cost_center": "CC-4100",
+    "criticality": "Low",
+    "tags": {
+      "env": "dev",
+      "app": "patient-portal",
+      "owner": "j.martinez",
+      "costcenter": "CC-4100",
+      "data_classification": "Test",
+      "lifecycle": "active"
+    },
+    "notes": "Dev API - runs 24/7 unnecessarily"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-dev-api-eastus",
+    "name": "func-nwh-notifications-dev-001",
+    "type": "Microsoft.Web/sites",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "s.chen@northwindhealth.fake",
+    "cost_center": "CC-4200",
+    "criticality": "Low",
+    "tags": {
+      "env": "dev",
+      "app": "notifications",
+      "owner": "s.chen",
+      "costcenter": "CC-4200",
+      "data_classification": "Test",
+      "lifecycle": "active"
+    },
+    "notes": "Dev notification function"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-dev-data-eastus",
+    "name": "sql-nwh-main-dev-001",
+    "type": "Microsoft.Sql/servers",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "d.patel@northwindhealth.fake",
+    "cost_center": "CC-4300",
+    "criticality": "Low",
+    "tags": {
+      "env": "dev",
+      "app": "shared",
+      "owner": "d.patel",
+      "costcenter": "CC-4300",
+      "data_classification": "Test",
+      "lifecycle": "active"
+    },
+    "notes": "Dev SQL Server"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-dev-data-eastus",
+    "name": "sqldb-nwh-patients-dev",
+    "type": "Microsoft.Sql/servers/databases",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "d.patel@northwindhealth.fake",
+    "cost_center": "CC-4300",
+    "criticality": "Low",
+    "tags": {
+      "env": "dev",
+      "app": "patient-portal",
+      "owner": "d.patel",
+      "costcenter": "CC-4300",
+      "data_classification": "Test",
+      "lifecycle": "active"
+    },
+    "notes": "Dev patient database - S2 tier"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-dev-data-eastus",
+    "name": "stnwhdevdata001",
+    "type": "Microsoft.Storage/storageAccounts",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "d.patel@northwindhealth.fake",
+    "cost_center": "CC-4300",
+    "criticality": "Low",
+    "tags": {
+      "env": "dev",
+      "app": "shared",
+      "owner": "d.patel",
+      "costcenter": "CC-4300",
+      "data_classification": "Test",
+      "lifecycle": "active"
+    },
+    "notes": "Dev storage account"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-dev-security-eastus",
+    "name": "kv-nwh-dev-001",
+    "type": "Microsoft.KeyVault/vaults",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "Medium",
+    "tags": {
+      "env": "dev",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000",
+      "data_classification": "Test",
+      "lifecycle": "active"
+    },
+    "notes": "Dev Key Vault"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-dev-monitoring-eastus",
+    "name": "ai-nwh-dev-001",
+    "type": "Microsoft.Insights/components",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "r.kim@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "Low",
+    "tags": {
+      "env": "dev",
+      "app": "shared",
+      "owner": "r.kim",
+      "costcenter": "CC-4000",
+      "data_classification": "Test",
+      "lifecycle": "active"
+    },
+    "notes": "Dev App Insights"
+  },
+  {
+    "subscription_name": "NWH-Shared-Services",
+    "resource_group": "rg-nwh-shared-identity-eastus",
+    "name": "id-nwh-portal-prod",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "patient-portal",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "Managed identity for portal apps"
+  },
+  {
+    "subscription_name": "NWH-Shared-Services",
+    "resource_group": "rg-nwh-shared-identity-eastus",
+    "name": "id-nwh-functions-prod",
+    "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "notifications",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "Managed identity for function apps"
+  },
+  {
+    "subscription_name": "NWH-Shared-Services",
+    "resource_group": "rg-nwh-shared-dns-eastus",
+    "name": "pdnsz-privatelink-sql",
+    "type": "Microsoft.Network/privateDnsZones",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "Private DNS zone for SQL"
+  },
+  {
+    "subscription_name": "NWH-Shared-Services",
+    "resource_group": "rg-nwh-shared-dns-eastus",
+    "name": "pdnsz-privatelink-blob",
+    "type": "Microsoft.Network/privateDnsZones",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "Private DNS zone for blob storage"
+  },
+  {
+    "subscription_name": "NWH-Shared-Services",
+    "resource_group": "rg-nwh-shared-dns-eastus",
+    "name": "pdnsz-privatelink-vault",
+    "type": "Microsoft.Network/privateDnsZones",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "m.thompson@northwindhealth.fake",
+    "cost_center": "CC-4000",
+    "criticality": "High",
+    "tags": {
+      "env": "prod",
+      "app": "shared",
+      "owner": "m.thompson",
+      "costcenter": "CC-4000"
+    },
+    "notes": "Private DNS zone for Key Vault"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-legacy-eastus",
+    "name": "vm-nwh-legacy-001",
+    "type": "Microsoft.Compute/virtualMachines",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "UNKNOWN",
+    "cost_center": "UNKNOWN",
+    "criticality": "Medium",
+    "tags": {
+      "env": "prod",
+      "lifecycle": "review"
+    },
+    "notes": "Legacy VM - no documented owner"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-legacy-eastus",
+    "name": "disk-nwh-legacy-001",
+    "type": "Microsoft.Compute/disks",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "UNKNOWN",
+    "cost_center": "UNKNOWN",
+    "criticality": "Low",
+    "tags": {
+      "env": "prod",
+      "lifecycle": "review"
+    },
+    "notes": "Orphaned disk - VM deleted"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-legacy-eastus",
+    "name": "pip-nwh-legacy-001",
+    "type": "Microsoft.Network/publicIPAddresses",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "UNKNOWN",
+    "cost_center": "UNKNOWN",
+    "criticality": "Low",
+    "tags": {
+      "env": "prod",
+      "lifecycle": "review"
+    },
+    "notes": "Orphaned public IP - unattached"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-legacy-eastus",
+    "name": "snap-nwh-backup-20250115",
+    "type": "Microsoft.Compute/snapshots",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "UNKNOWN",
+    "cost_center": "UNKNOWN",
+    "criticality": "Low",
+    "tags": {
+      "env": "prod",
+      "lifecycle": "review"
+    },
+    "notes": "Old snapshot - 6+ months old"
+  },
+  {
+    "subscription_name": "NWH-Production",
+    "resource_group": "rg-nwh-legacy-eastus",
+    "name": "nic-nwh-legacy-001",
+    "type": "Microsoft.Network/networkInterfaces",
+    "region": "eastus",
+    "environment": "Production",
+    "owner": "UNKNOWN",
+    "cost_center": "UNKNOWN",
+    "criticality": "Low",
+    "tags": {
+      "env": "prod",
+      "lifecycle": "review"
+    },
+    "notes": "Orphaned NIC - VM deleted"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-test-temp-eastus",
+    "name": "app-nwh-loadtest-001",
+    "type": "Microsoft.Web/sites",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "a.wong@northwindhealth.fake",
+    "cost_center": "CC-4100",
+    "criticality": "Low",
+    "tags": {
+      "env": "test",
+      "app": "loadtest",
+      "owner": "a.wong",
+      "costcenter": "CC-4100",
+      "lifecycle": "temporary"
+    },
+    "notes": "Load test app - should be deleted"
+  },
+  {
+    "subscription_name": "NWH-Development",
+    "resource_group": "rg-nwh-test-temp-eastus",
+    "name": "plan-nwh-loadtest-001",
+    "type": "Microsoft.Web/serverfarms",
+    "region": "eastus",
+    "environment": "Development",
+    "owner": "a.wong@northwindhealth.fake",
+    "cost_center": "CC-4100",
+    "criticality": "Low",
+    "tags": {
+      "env": "test",
+      "app": "loadtest",
+      "owner": "a.wong",
+      "costcenter": "CC-4100",
+      "lifecycle": "temporary"
+    },
+    "notes": "Load test plan - P1v2 - expensive for temp use"
+  }
+]

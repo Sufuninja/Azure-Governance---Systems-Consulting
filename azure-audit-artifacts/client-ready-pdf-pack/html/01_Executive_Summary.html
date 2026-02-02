@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>01_Executive_Summary.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="executive-summary">Executive Summary</h1>
+<p><strong>Azure Environment Audit — Northwind Health</strong></p>
+<hr>
+<h2 id="engagement-overview">Engagement Overview</h2>
+<p>This document summarizes the findings from a comprehensive audit of Northwind Health's Azure environment, conducted in January–February 2026. The assessment covered three subscriptions (Production, Development, and Shared Services) containing approximately 45 resources across compute, data, networking, security, and monitoring services.</p>
+<p>The audit focused on four key areas:</p>
+<ul>
+<li>Resource organization and governance</li>
+<li>Cost efficiency and optimization opportunities</li>
+<li>Architecture dependencies and risk posture</li>
+<li>Operational maturity and change management</li>
+</ul>
+<hr>
+<h2 id="key-findings">Key Findings</h2>
+<h3 id="environment-complexity">Environment Complexity</h3>
+<p>The Northwind Health Azure environment supports a patient-facing portal, internal APIs, notification services, and a container-based microservices platform. The architecture follows a reasonable tiered design with web, API, and data layers separated by subnets and secured via private endpoints.</p>
+<p><strong>Strengths identified:</strong></p>
+<ul>
+<li>Private endpoints in place for SQL, Storage, and Key Vault</li>
+<li>Managed identities used for application authentication</li>
+<li>Application Insights configured for observability</li>
+</ul>
+<p><strong>Areas requiring attention:</strong></p>
+<ul>
+<li>Inconsistent naming conventions across resources</li>
+<li>Incomplete tagging, particularly for legacy resources</li>
+<li>Five orphaned resources with no documented owner</li>
+<li>Dev environment resources running 24/7 unnecessarily</li>
+</ul>
+<h3 id="governance-gaps">Governance Gaps</h3>
+<p>The environment lacks a formal naming standard, resulting in inconsistent resource names that complicate management and cost attribution. Several resources are missing required tags (owner, cost center, data classification), making it difficult to track accountability and compliance.</p>
+<p>A recommended naming standard and tag governance framework is provided in the accompanying documentation.</p>
+<h3 id="cost-optimization-opportunities">Cost Optimization Opportunities</h3>
+<p>Current monthly Azure spend is approximately <strong>$18,450</strong>. The audit identified optimization opportunities totaling <strong>$4,200–$5,800 per month</strong> (23–31% reduction), with potential annual savings of <strong>$50,400–$69,600</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Monthly Savings</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Delete orphaned/temporary resources</td>
+<td>$575</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Right-size overprovisioned compute</td>
+<td>$1,540</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Optimize storage tiers</td>
+<td>$420</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Implement dev auto-shutdown</td>
+<td>$1,100</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Service tier adjustments</td>
+<td>$1,300</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Reserved Instance pricing</td>
+<td>$600</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<p>Detailed recommendations with implementation steps are provided in the Cost Analysis document.</p>
+<h3 id="risk-assessment">Risk Assessment</h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Severity</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Legacy VM with unknown owner</td>
+<td>Medium</td>
+<td>Identify owner or decommission</td>
+</tr>
+<tr>
+<td>Overprovisioned production compute</td>
+<td>Low</td>
+<td>Right-size based on usage data</td>
+</tr>
+<tr>
+<td>Service Bus Premium underutilized</td>
+<td>Low</td>
+<td>Evaluate Standard tier feasibility</td>
+</tr>
+<tr>
+<td>90-day log retention (default)</td>
+<td>Low</td>
+<td>Reduce to 30 days, archive if needed</td>
+</tr>
+<tr>
+<td>Key Vault redundancy</td>
+<td>Low</td>
+<td>Consolidate to single vault</td>
+</tr>
+</tbody>
+</table>
+<p>No critical security vulnerabilities were identified during this audit. The private endpoint architecture provides strong network isolation for sensitive data services.</p>
+<hr>
+<h2 id="recommended-next-steps">Recommended Next Steps</h2>
+<h3 id="immediate-this-week">Immediate (This Week)</h3>
+<ol>
+<li>
+<p><strong>Delete orphaned resources</strong> — Validate and remove the identified orphaned disk, public IP, NIC, and old snapshot after confirmation they are unused.</p>
+</li>
+<li>
+<p><strong>Remove temporary test resources</strong> — Delete the load testing resource group (<code>rg-nwh-test-temp-eastus</code>) following owner confirmation.</p>
+</li>
+<li>
+<p><strong>Identify legacy resource owners</strong> — Assign ownership to <code>vm-nwh-legacy-001</code> and associated resources, or begin decommission planning.</p>
+</li>
+</ol>
+<h3 id="short-term-this-month">Short-Term (This Month)</h3>
+<ol start="4">
+<li>
+<p><strong>Adopt naming standard</strong> — Implement the provided naming convention for all new resources. Plan remediation for existing resources during next maintenance window.</p>
+</li>
+<li>
+<p><strong>Enforce tag requirements</strong> — Deploy Azure Policy to require mandatory tags on resource creation.</p>
+</li>
+<li>
+<p><strong>Right-size production compute</strong> — Downgrade <code>plan-nwh-portal-prod-001</code> from P2v3 to P1v3 based on utilization data showing 25% average CPU.</p>
+</li>
+<li>
+<p><strong>Optimize storage tiers</strong> — Migrate <code>stnwhbackups001</code> from Hot to Cool tier.</p>
+</li>
+</ol>
+<h3 id="medium-term-this-quarter">Medium-Term (This Quarter)</h3>
+<ol start="8">
+<li>
+<p><strong>Implement dev auto-shutdown</strong> — Configure automation to stop development resources outside business hours.</p>
+</li>
+<li>
+<p><strong>Evaluate Reserved Instances</strong> — Analyze stable workloads for 1-year reserved capacity pricing on SQL databases.</p>
+</li>
+<li>
+<p><strong>Review Service Bus tier</strong> — Evaluate whether Standard tier meets requirements given current message volume (~500/day).</p>
+</li>
+</ol>
+<hr>
+<h2 id="summary">Summary</h2>
+<p>The Northwind Health Azure environment is fundamentally sound with appropriate security controls in place. The primary opportunities lie in governance improvements (naming, tagging) and cost optimization through right-sizing and tier adjustments.</p>
+<p>Implementing the recommendations in this report will reduce monthly spend by 23–31%, improve operational clarity through consistent naming and tagging, and reduce risk by addressing orphaned and undocumented resources.</p>
+<p>We recommend scheduling a follow-up session to prioritize the implementation roadmap and address any questions regarding specific recommendations.</p>
+<hr>
+<p><em>Prepared by Azure Governance Consulting — February 2026</em></p>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+service_category,service_type,resource_name,subscription,monthly_cost,percentage_of_total,optimization_potential,notes
+SQL Database,Microsoft.Sql/servers/databases,sqldb-nwh-patients-prod,NWH-Production,2800.00,15.2%,Medium,S3 tier - consider RI pricing
+SQL Database,Microsoft.Sql/servers/databases,sqldb-nwh-appointments-prod,NWH-Production,1400.00,7.6%,Medium,S3 tier - consider RI pricing
+SQL Database,Microsoft.Sql/servers/databases,sqldb-nwh-patients-dev,NWH-Development,650.00,3.5%,High,S2 tier - runs 24/7 unnecessarily
+App Service Plan,Microsoft.Web/serverfarms,plan-nwh-portal-prod-001,NWH-Production,1500.00,8.1%,High,P2v3 - 25% CPU avg; downgrade to P1v3
+App Service Plan,Microsoft.Web/serverfarms,plan-nwh-api-prod-001,NWH-Production,1150.00,6.2%,Medium,P1v3 - appropriately sized
+App Service Plan,Microsoft.Web/serverfarms,plan-nwh-portal-dev-001,NWH-Development,780.00,4.2%,High,B2 tier - runs 24/7 unnecessarily; hosts dev web + api
+App Service Plan,Microsoft.Web/serverfarms,plan-nwh-loadtest-001,NWH-Development,490.00,2.7%,Very High,P1v2 for temp test - should be deleted
+AKS Cluster,Microsoft.ContainerService/managedClusters,aks-nwh-prod-001,NWH-Production,2680.00,14.5%,High,3 nodes; ~15% utilization; reduce to 2
+Storage Account,Microsoft.Storage/storageAccounts,stnwhpatientdocs001,NWH-Production,1200.00,6.5%,Low,Hot tier appropriate for active documents
+Storage Account,Microsoft.Storage/storageAccounts,stnwhbackups001,NWH-Production,650.00,3.5%,High,Hot tier for backups - migrate to Cool
+Storage Account,Microsoft.Storage/storageAccounts,stnwhdevdata001,NWH-Development,300.00,1.6%,Low,Dev data storage - appropriately sized
+Service Bus,Microsoft.ServiceBus/namespaces,sb-nwh-prod-001,NWH-Production,1890.00,10.2%,High,Premium tier; ~500 msgs/day; evaluate Standard
+App Insights,Microsoft.Insights/components,ai-nwh-prod-001,NWH-Production,680.00,3.7%,Medium,15GB/day ingestion; enable sampling
+App Insights,Microsoft.Insights/components,ai-nwh-dev-001,NWH-Development,340.00,1.8%,Medium,Verbose logging in dev; reduce log levels
+Log Analytics,Microsoft.OperationalInsights/workspaces,log-nwh-prod-001,NWH-Production,400.00,2.2%,Medium,90 day retention; reduce to 30 days
+Virtual Machine,Microsoft.Compute/virtualMachines,vm-nwh-legacy-001,NWH-Production,580.00,3.1%,High,Legacy VM - evaluate need
+Compute Disk,Microsoft.Compute/disks,disk-nwh-legacy-001,NWH-Production,45.00,0.2%,Very High,Orphaned disk - delete after validation
+Snapshot,Microsoft.Compute/snapshots,snap-nwh-backup-20250115,NWH-Production,25.00,0.1%,Very High,6+ months old - delete after validation
+Public IP,Microsoft.Network/publicIPAddresses,pip-nwh-legacy-001,NWH-Production,15.00,0.1%,Very High,Orphaned IP - delete after validation
+Container Registry,Microsoft.ContainerRegistry/registries,acr-nwh-prod-001,NWH-Production,400.00,2.2%,Low,Premium SKU required for geo-replication
+Key Vault,Microsoft.KeyVault/vaults,kv-nwh-prod-001,NWH-Production,25.00,0.1%,None,Transaction-based pricing; appropriate
+Key Vault,Microsoft.KeyVault/vaults,kv-nwh-prod-002,NWH-Production,15.00,0.1%,Medium,Potentially redundant; consolidate
+Key Vault,Microsoft.KeyVault/vaults,kv-nwh-dev-001,NWH-Development,10.00,0.1%,None,Dev vault; appropriate
+Network,Microsoft.Network/*,Private Endpoints & DNS,NWH-Production,180.00,1.0%,None,Required for security posture
+Network,Microsoft.Network/*,VNet & Subnets,NWH-Production,0.00,0.0%,None,No cost for VNet/subnet resources
+Managed Identity,Microsoft.ManagedIdentity/*,All Identities,NWH-Shared-Services,0.00,0.0%,None,No cost for managed identities
+Private DNS,Microsoft.Network/privateDnsZones,All DNS Zones,NWH-Shared-Services,15.00,0.1%,None,Required for private endpoint resolution
+Other,Miscellaneous,Bandwidth & Data Transfer,All,200.00,1.1%,Low,Egress charges; monitor for anomalies
+TOTAL,All Services,All Resources,All Subscriptions,18450.00,100.0%,,$4200-$5800 potential monthly savings

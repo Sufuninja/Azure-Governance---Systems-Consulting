@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>03_Cost_Analysis_and_Quick_Wins.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="cost-analysis-and-optimization-opportunities">Cost Analysis and Optimization Opportunities</h1>
+<p><strong>Northwind Health — Azure Environment</strong><br>
+<strong>Assessment Period: January 2026</strong></p>
+<hr>
+<h2 id="current-state-overview">Current State Overview</h2>
+<p>The Northwind Health Azure environment spans three subscriptions with a combined monthly spend of approximately <strong>$18,450</strong>. This analysis identifies optimization opportunities totaling <strong>$4,200–$5,800 per month</strong>, representing a 23–31% cost reduction with minimal operational risk.</p>
+<h3 id="spend-distribution-by-service">Spend Distribution by Service</h3>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Monthly Cost</th>
+<th>% of Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure SQL Database</td>
+<td>$4,850</td>
+<td>26.3%</td>
+</tr>
+<tr>
+<td>App Service Plans</td>
+<td>$3,920</td>
+<td>21.2%</td>
+</tr>
+<tr>
+<td>AKS (Kubernetes)</td>
+<td>$2,680</td>
+<td>14.5%</td>
+</tr>
+<tr>
+<td>Storage Accounts</td>
+<td>$2,150</td>
+<td>11.7%</td>
+</tr>
+<tr>
+<td>Service Bus</td>
+<td>$1,890</td>
+<td>10.2%</td>
+</tr>
+<tr>
+<td>App Insights / Log Analytics</td>
+<td>$1,420</td>
+<td>7.7%</td>
+</tr>
+<tr>
+<td>Virtual Machines (Legacy)</td>
+<td>$890</td>
+<td>4.8%</td>
+</tr>
+<tr>
+<td>Other (Network, DNS, etc.)</td>
+<td>$650</td>
+<td>3.5%</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>$18,450</strong></td>
+<td><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="spend-distribution-by-environment">Spend Distribution by Environment</h3>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Monthly Cost</th>
+<th>% of Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Production</td>
+<td>$14,200</td>
+<td>77.0%</td>
+</tr>
+<tr>
+<td>Development</td>
+<td>$3,450</td>
+<td>18.7%</td>
+</tr>
+<tr>
+<td>Shared Services</td>
+<td>$800</td>
+<td>4.3%</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="optimization-opportunities-summary">Optimization Opportunities Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Opportunity</th>
+<th>Monthly Savings</th>
+<th>Effort</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Delete orphaned resources</td>
+<td>$85</td>
+<td>Very Low</td>
+<td>Very Low</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Remove temporary load test resources</td>
+<td>$490</td>
+<td>Very Low</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Reduce Log Analytics retention</td>
+<td>$280</td>
+<td>Low</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Downgrade Production App Service Plan</td>
+<td>$650</td>
+<td>Low</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Right-size AKS cluster</td>
+<td>$890</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Migrate backup storage to Cool tier</td>
+<td>$420</td>
+<td>Low</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Implement dev environment auto-shutdown</td>
+<td>$1,100</td>
+<td>Medium</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Downgrade Service Bus tier</td>
+<td>$700</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Reserved Instances for SQL</td>
+<td>$600</td>
+<td>Low</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Optimize App Insights sampling</td>
+<td>$400</td>
+<td>Medium</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total Identified Savings: $4,200–$5,800/month</strong><br>
+<strong>Potential Annual Savings: $50,400–$69,600</strong></p>
+<hr>
+<h2 id="detailed-recommendations">Detailed Recommendations</h2>
+<h3 id="1-delete-orphaned-resources">1. Delete Orphaned Resources</h3>
+<p><strong>Savings:</strong> $85/month<br>
+<strong>Effort:</strong> Very Low (&lt; 1 hour)<br>
+<strong>Risk:</strong> Very Low</p>
+<p>The following resources are orphaned (not attached to any active workload):</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Type</th>
+<th>Estimated Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>disk-nwh-legacy-001</code></td>
+<td>Managed Disk</td>
+<td>$45/month</td>
+</tr>
+<tr>
+<td><code>pip-nwh-legacy-001</code></td>
+<td>Public IP</td>
+<td>$15/month</td>
+</tr>
+<tr>
+<td><code>snap-nwh-backup-20250115</code></td>
+<td>Snapshot</td>
+<td>$25/month</td>
+</tr>
+<tr>
+<td><code>nic-nwh-legacy-001</code></td>
+<td>Network Interface</td>
+<td>$0 (no cost)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action:</strong> Move to quarantine resource group for 7-day observation period, then delete after confirming no dependencies.</p>
+<hr>
+<h3 id="2-remove-temporary-load-test-resources">2. Remove Temporary Load Test Resources</h3>
+<p><strong>Savings:</strong> $490/month<br>
+<strong>Effort:</strong> Very Low (&lt; 1 hour)<br>
+<strong>Risk:</strong> Low</p>
+<p>The resource group <code>rg-nwh-test-temp-eastus</code> contains load testing resources that are no longer needed:</p>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Type</th>
+<th>Estimated Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app-nwh-loadtest-001</code></td>
+<td>App Service</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>plan-nwh-loadtest-001</code></td>
+<td>App Service Plan (P1v2)</td>
+<td>$490/month</td>
+</tr>
+</tbody>
+</table>
+<p>These resources are tagged with <code>lifecycle=temporary</code> and testing was completed over 30 days ago.</p>
+<p><strong>Action:</strong> Confirm with owner (a.wong@northwindhealth.fake) that testing is complete, then delete the entire resource group.</p>
+<hr>
+<h3 id="3-reduce-log-analytics-retention">3. Reduce Log Analytics Retention</h3>
+<p><strong>Savings:</strong> $280/month<br>
+<strong>Effort:</strong> Low (&lt; 2 hours)<br>
+<strong>Risk:</strong> Low</p>
+<table>
+<thead>
+<tr>
+<th>Current State</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>log-nwh-prod-001</code> retention: 90 days</td>
+<td>30 days operational</td>
+</tr>
+<tr>
+<td>Cost: ~$680/month</td>
+<td>Cost: ~$400/month</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action:</strong></p>
+<ol>
+<li>Reduce retention to 30 days</li>
+<li>Configure export to Storage Account (Cool tier) for long-term archival if compliance requires</li>
+<li>Use Archive tier for data older than 90 days</li>
+</ol>
+<hr>
+<h3 id="4-downgrade-production-app-service-plan">4. Downgrade Production App Service Plan</h3>
+<p><strong>Savings:</strong> $650/month<br>
+<strong>Effort:</strong> Low (1–2 hours)<br>
+<strong>Risk:</strong> Medium (requires validation)</p>
+<table>
+<thead>
+<tr>
+<th>Current</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plan-nwh-portal-prod-001</code></td>
+<td>Same plan</td>
+</tr>
+<tr>
+<td>SKU: P2v3 (4 vCPU, 16 GB)</td>
+<td>SKU: P1v3 (2 vCPU, 8 GB)</td>
+</tr>
+<tr>
+<td>Cost: ~$1,500/month</td>
+<td>Cost: ~$850/month</td>
+</tr>
+<tr>
+<td>Utilization: 25% CPU, 30% memory</td>
+<td>Adequate headroom at P1v3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action:</strong></p>
+<ol>
+<li>Review 30-day performance metrics to confirm utilization</li>
+<li>Test workload on P1v3 in staging environment</li>
+<li>Schedule scale-down during low-traffic window</li>
+<li>Monitor for 48 hours post-change</li>
+</ol>
+<p><strong>Alternative:</strong> Implement autoscaling rules to scale between P1v3 (baseline) and P2v3 (peak).</p>
+<hr>
+<h3 id="5-right-size-aks-cluster">5. Right-Size AKS Cluster</h3>
+<p><strong>Savings:</strong> $890/month<br>
+<strong>Effort:</strong> Medium (4–8 hours)<br>
+<strong>Risk:</strong> Medium</p>
+<table>
+<thead>
+<tr>
+<th>Current</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aks-nwh-prod-001</code></td>
+<td>Same cluster</td>
+</tr>
+<tr>
+<td>Nodes: 3 × Standard_D4s_v3</td>
+<td>Nodes: 2 × Standard_D4s_v3</td>
+</tr>
+<tr>
+<td>Utilization: ~15%</td>
+<td>Enable autoscaler (min: 2, max: 4)</td>
+</tr>
+<tr>
+<td>Cost: ~$2,680/month</td>
+<td>Cost: ~$1,790/month</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action:</strong></p>
+<ol>
+<li>Review pod resource requests and limits</li>
+<li>Analyze peak utilization patterns over past 30 days</li>
+<li>Enable cluster autoscaler</li>
+<li>Scale node pool to 2 nodes</li>
+<li>Test pod scheduling and failover scenarios</li>
+</ol>
+<hr>
+<h3 id="6-migrate-backup-storage-to-cool-tier">6. Migrate Backup Storage to Cool Tier</h3>
+<p><strong>Savings:</strong> $420/month<br>
+<strong>Effort:</strong> Low (2–4 hours)<br>
+<strong>Risk:</strong> Low</p>
+<table>
+<thead>
+<tr>
+<th>Current</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stnwhbackups001</code> tier: Hot</td>
+<td>Tier: Cool</td>
+</tr>
+<tr>
+<td>Access pattern: Monthly or less</td>
+<td>Cool is optimal for infrequent access</td>
+</tr>
+<tr>
+<td>Cost: ~$650/month</td>
+<td>Cost: ~$230/month</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action:</strong></p>
+<ol>
+<li>Analyze blob access patterns via Storage Analytics</li>
+<li>Create lifecycle management policy to automatically tier blobs:
+<ul>
+<li>Move to Cool after 30 days</li>
+<li>Move to Archive after 180 days</li>
+</ul>
+</li>
+<li>Set default tier to Cool for new uploads</li>
+</ol>
+<hr>
+<h3 id="7-implement-dev-environment-auto-shutdown">7. Implement Dev Environment Auto-Shutdown</h3>
+<p><strong>Savings:</strong> $1,100/month<br>
+<strong>Effort:</strong> Medium (4–6 hours)<br>
+<strong>Risk:</strong> Low</p>
+<p>Development resources currently run 24/7 (168 hours/week) despite actual usage of ~45 hours/week during business hours.</p>
+<p><strong>Affected resources:</strong></p>
+<ul>
+<li><code>plan-nwh-portal-dev-001</code> (B2)</li>
+<li><code>sql-nwh-main-dev-001</code> and databases</li>
+<li>Associated services</li>
+</ul>
+<p><strong>Action:</strong></p>
+<ol>
+<li>Document required uptime hours with development team</li>
+<li>Implement Azure Automation runbook for scheduled stop/start</li>
+<li>Configure SQL auto-pause (if using Serverless) or scheduled scale-down</li>
+<li>Target schedule: 7 AM – 7 PM weekdays only</li>
+</ol>
+<hr>
+<h3 id="8-evaluate-service-bus-tier">8. Evaluate Service Bus Tier</h3>
+<p><strong>Savings:</strong> $700/month<br>
+<strong>Effort:</strong> Medium (4–8 hours)<br>
+<strong>Risk:</strong> Medium</p>
+<table>
+<thead>
+<tr>
+<th>Current</th>
+<th>Potential</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sb-nwh-prod-001</code> tier: Premium</td>
+<td>Tier: Standard</td>
+</tr>
+<tr>
+<td>Message volume: ~500 messages/day</td>
+<td>Standard handles this easily</td>
+</tr>
+<tr>
+<td>Cost: ~$1,890/month</td>
+<td>Cost: ~$1,190/month</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important consideration:</strong> Premium tier is required for private endpoints. If network isolation is mandatory, this recommendation may not apply.</p>
+<p><strong>Action:</strong></p>
+<ol>
+<li>Confirm whether private endpoint requirement is firm</li>
+<li>If not, test Standard tier in non-production</li>
+<li>Plan migration during maintenance window</li>
+</ol>
+<hr>
+<h3 id="9-reserved-instances-for-sql-databases">9. Reserved Instances for SQL Databases</h3>
+<p><strong>Savings:</strong> $600/month<br>
+<strong>Effort:</strong> Low (1–2 hours)<br>
+<strong>Risk:</strong> Low (financial commitment only)</p>
+<p>Production SQL databases are stable, long-term workloads suitable for Reserved Capacity pricing.</p>
+<table>
+<thead>
+<tr>
+<th>Current</th>
+<th>With Reserved Capacity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pay-As-You-Go pricing</td>
+<td>1-year Reserved Capacity</td>
+</tr>
+<tr>
+<td>SQL spend: ~$4,850/month</td>
+<td>~40% discount on vCore costs</td>
+</tr>
+<tr>
+<td></td>
+<td>Estimated savings: ~$600/month</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action:</strong></p>
+<ol>
+<li>Confirm SQL databases will remain in use for 12+ months</li>
+<li>Calculate exact reserved capacity requirements</li>
+<li>Purchase via Azure Portal or Enterprise Agreement</li>
+</ol>
+<hr>
+<h3 id="10-optimize-app-insights-sampling">10. Optimize App Insights Sampling</h3>
+<p><strong>Savings:</strong> $400/month<br>
+<strong>Effort:</strong> Medium (4–6 hours)<br>
+<strong>Risk:</strong> Low</p>
+<table>
+<thead>
+<tr>
+<th>Current</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ai-nwh-prod-001</code> sampling: 100%</td>
+<td>Adaptive sampling: 25–50%</td>
+</tr>
+<tr>
+<td>Ingestion: ~15 GB/day</td>
+<td>Target: ~5–8 GB/day</td>
+</tr>
+<tr>
+<td>Cost: ~$680/month</td>
+<td>Cost: ~$280/month</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Action:</strong></p>
+<ol>
+<li>Review telemetry data to identify high-volume, low-value events</li>
+<li>Enable adaptive sampling in Application Insights SDK</li>
+<li>Add filtering for common dependency calls (e.g., health checks)</li>
+<li>Adjust log levels in application code</li>
+</ol>
+<hr>
+<h2 id="implementation-roadmap">Implementation Roadmap</h2>
+<h3 id="week-1-immediate">Week 1 (Immediate)</h3>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">Delete orphaned resources (after validation)</label></li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">Remove load test resources</label></li>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2">Reduce Log Analytics retention</label></li>
+</ul>
+<p><strong>Quick win savings: $855/month</strong></p>
+<h3 id="week-2%E2%80%934-this-month">Week 2–4 (This Month)</h3>
+<ul>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3">Downgrade App Service Plan</label></li>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4">Migrate backup storage to Cool tier</label></li>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5">Evaluate Reserved Instance pricing</label></li>
+</ul>
+<p><strong>Month 1 savings: $1,925/month</strong></p>
+<h3 id="month-2%E2%80%933-this-quarter">Month 2–3 (This Quarter)</h3>
+<ul>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6">Right-size AKS cluster</label></li>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7">Implement dev auto-shutdown</label></li>
+<li><input type="checkbox" id="checkbox8"><label for="checkbox8">Evaluate Service Bus tier</label></li>
+<li><input type="checkbox" id="checkbox9"><label for="checkbox9">Optimize App Insights sampling</label></li>
+</ul>
+<p><strong>Full implementation savings: $4,200–$5,800/month</strong></p>
+<hr>
+<h2 id="ongoing-cost-governance">Ongoing Cost Governance</h2>
+<p>To maintain cost efficiency, we recommend:</p>
+<ol>
+<li><strong>Monthly cost reviews</strong> — Review Azure Cost Management reports monthly</li>
+<li><strong>Azure Advisor</strong> — Review and action recommendations quarterly</li>
+<li><strong>Budget alerts</strong> — Configure budget alerts at 80% and 100% thresholds</li>
+<li><strong>Tag enforcement</strong> — Ensure cost center tags are applied for accurate allocation</li>
+<li><strong>Reserved Instance review</strong> — Re-evaluate RI coverage annually</li>
+</ol>
+<hr>
+<p><em>All cost estimates are based on Azure Pay-As-You-Go pricing as of January 2026. Actual costs may vary based on usage patterns and regional pricing.</em></p>
+
+</body>
+</html>
